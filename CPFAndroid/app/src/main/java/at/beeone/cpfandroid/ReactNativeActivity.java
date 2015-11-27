@@ -24,22 +24,24 @@ public class ReactNativeActivity extends FragmentActivity implements DefaultHard
     }
 
     private ReactRootView mReactRootView;
-    private ReactInstanceManager mReactInstanceManager;
+    private static ReactInstanceManager mReactInstanceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mReactRootView = new ReactRootView(this);
-        mReactInstanceManager = ReactInstanceManager.builder()
-                .setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")
-                .setJSMainModuleName("index.android")
-                .addPackage(new MainReactPackage())
-                .setUseDeveloperSupport(BuildConfig.DEBUG)
-                .setInitialLifecycleState(LifecycleState.RESUMED)
-                .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "MyAwesomeApp", null);
+        if (mReactInstanceManager == null) {
+            mReactInstanceManager = ReactInstanceManager.builder()
+                    .setApplication(getApplication())
+                    .setBundleAssetName("index.android.bundle")
+                    .setJSMainModuleName("index.android")
+                    .addPackage(new MainReactPackage())
+                    .setUseDeveloperSupport(BuildConfig.DEBUG)
+                    .setInitialLifecycleState(LifecycleState.RESUMED)
+                    .build();
+        }
+        mReactRootView.startReactApplication(mReactInstanceManager, "CrazyProgrammerFriday", null);
 
         setContentView(mReactRootView);
     }
@@ -63,7 +65,7 @@ public class ReactNativeActivity extends FragmentActivity implements DefaultHard
         super.onResume();
 
         if (mReactInstanceManager != null) {
-            mReactInstanceManager.onResume(this);
+            mReactInstanceManager.onResume(this, this);
         }
     }
 

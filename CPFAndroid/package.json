@@ -1,0 +1,15 @@
+{
+  "name": "cpfandroid",
+  "version": "1.0.0",
+  "description": "CrazyProgrammerFriday",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/react-native/packager/packager.sh"
+  },
+  "author": "Ben+Mike",
+  "license": "ISC",
+  "dependencies": {
+    "react-native": "^0.16.0-rc"
+  }
+}
